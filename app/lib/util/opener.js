@@ -29,9 +29,17 @@ module.exports = function opener(args, tool) {
         }
         case 'darwin': {
             command = 'open';
-            if (tool) {
+            tool = 'Google Chrome'
+            //tool = 'Safari'
+            if (/chrome/i.test(tool)) {
+                args.unshift('--new-window');
+                args.unshift('--args');
                 args.unshift(tool);
-                args.unshift('-a');
+                args.unshift('-na');
+            }
+            else if (/safari/i.test(tool)) {
+                args.unshift(tool);
+                args.unshift('-na');
             }
             break;
         }
